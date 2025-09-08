@@ -1,5 +1,16 @@
 /* Порядок важен: link → visited → hover → active */
-a:link{} a:visited{} a:hover{} a:active{}
+a:link{
+
+} 
+a:visited{
+
+} 
+a:hover{
+
+} 
+a:active{
+    
+}
 
 /* :where(...) не добавляет специфичности — проще переопределять позже */
 :where(a,button,input,select,textarea):focus-visible{

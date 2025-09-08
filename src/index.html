@@ -27,7 +27,24 @@ cta" href="#contacts">Связаться</a></li>
             </nav>
         </header>
     </header>
+<button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
 
+   <script defer>
+    const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+    // Автовыбор: системная тема или сохранённый выбор пользователя
+    if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) &&
+        prefersDark)) {
+        document.body.classList.add('theme-dark');
+        btn?.setAttribute('aria-pressed', 'true');
+    }
+    // Переключение по кнопке с сохранением в localStorage
+    btn?.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        btn.setAttribute('aria-pressed', String(isDark));
+        localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+    });
+</script> 
     <!-- Уникальное основное содержимое страницы -->
     <main>
         <h1>Добро пожаловать в VostART!</h1>
@@ -59,23 +76,7 @@ cta" href="#contacts">Связаться</a></li>
         <p>&copy; 2025 VostART. Все права защищены.</p>
         <p>Телефон: +7 (926) 672-69-92</p>
     </footer>
-    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
-<script defer>
-    const KEY = 'theme', btn = document.querySelector('.theme-toggle');
-    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
-    // Автовыбор: системная тема или сохранённый выбор пользователя
-    if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) &&
-        prefersDark)) {
-        document.body.classList.add('theme-dark');
-        btn?.setAttribute('aria-pressed', 'true');
-    }
-    // Переключение по кнопке с сохранением в localStorage
-    btn?.addEventListener('click', () => {
-        const isDark = document.body.classList.toggle('theme-dark');
-        btn.setAttribute('aria-pressed', String(isDark));
-        localStorage.setItem(KEY, isDark ? 'dark' : 'light');
-    });
-</script>
+    
 </body>
 <!-- width/height уменьшают «скачок» макета (CLS); alt обязателен -->
 <img
@@ -97,8 +98,7 @@ loading="lazy">
 <!-- Добавьте субтитры через <track> (WebVTT); poster — превью-кадр -->
 <video class="media" controls preload="metadata" playsinline
 width="960" height="540" poster="video/poster.jpg">
-<source src="video/teaser-1080.mp4" type="video/mp4"> <!-- основной
-формат -->
+<source src="video/teaser-1080.mp4" type="video/mp4"> <!-- основнойформат -->
 <source src="video/teaser-720.webm" type="video/webm"> <!-- альтернатива -->
 <track kind="captions" srclang="ru" src="video/captions-ru.vtt"
 label="Русские субтитры" default>
