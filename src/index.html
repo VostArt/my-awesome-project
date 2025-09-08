@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная - VostART</title>
-    <meta name="description" content="VostART - творческая студия дизайна и разработки. Создаем уникальные решения для вашего бизнеса.">
+    <meta name="description"
+        content="VostART - творческая студия дизайна и разработки. Создаем уникальные решения для вашего бизнеса.">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
 </head>
+
 <body>
     <!-- Шапка сайта -->
     <header>
-        <a href="/">VostART</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>
+        <header class="site-header">
+            <a class="site-header__brand" href="/">Лого</a>
+            <nav class="site-nav" aria-label="Основная навигация">
+                <ul class="site-nav__list">
+                    <li class="site-nav__item"><a class="site-nav__link" href="index.html">Главная</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link" href="about.html">О нас</a></li>
+                    <li class="site-nav__item"><a class="site-nav__link site-nav__link--
+cta" href="#contacts">Связаться</a></li>
+                </ul>
+            </nav>
+        </header>
     </header>
 
     <!-- Уникальное основное содержимое страницы -->
@@ -46,7 +51,7 @@
             <p>Наши контакты...</p>
             <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
         </section>
-        
+
     </main>
 
     <!-- Подвал сайта -->
@@ -54,5 +59,49 @@
         <p>&copy; 2025 VostART. Все права защищены.</p>
         <p>Телефон: +7 (926) 672-69-92</p>
     </footer>
+    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
+<script defer>
+    const KEY = 'theme', btn = document.querySelector('.theme-toggle');
+    const prefersDark = matchMedia('(prefers-color-scheme: dark)').matches;
+    // Автовыбор: системная тема или сохранённый выбор пользователя
+    if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) &&
+        prefersDark)) {
+        document.body.classList.add('theme-dark');
+        btn?.setAttribute('aria-pressed', 'true');
+    }
+    // Переключение по кнопке с сохранением в localStorage
+    btn?.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('theme-dark');
+        btn.setAttribute('aria-pressed', String(isDark));
+        localStorage.setItem(KEY, isDark ? 'dark' : 'light');
+    });
+</script>
 </body>
+<!-- width/height уменьшают «скачок» макета (CLS); alt обязателен -->
+<img
+    src="img/card-640.jpg"
+    alt="Проект: макет мобильного приложения"
+    width="640" height="360"
+    loading="lazy" decoding="async">
+
+
+<!-- Браузер сам выбирает лучший ресурс по ширине контейнера -->
+<img
+src="img/card-640.jpg"
+srcset="img/card-640.jpg 640w, img/card-960.jpg 960w, img/card-1280.jpg
+1280w"
+sizes="(max-width: 700px) 92vw, (max-width: 1200px) 640px, 960px"
+alt="Проект: макет мобильного приложения"
+loading="lazy">
+
+<!-- Добавьте субтитры через <track> (WebVTT); poster — превью-кадр -->
+<video class="media" controls preload="metadata" playsinline
+width="960" height="540" poster="video/poster.jpg">
+<source src="video/teaser-1080.mp4" type="video/mp4"> <!-- основной
+формат -->
+<source src="video/teaser-720.webm" type="video/webm"> <!-- альтернатива -->
+<track kind="captions" srclang="ru" src="video/captions-ru.vtt"
+label="Русские субтитры" default>
+Ваш браузер не поддерживает видео.
+</video>
 </html>
